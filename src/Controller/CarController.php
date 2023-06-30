@@ -33,4 +33,49 @@ class CarController extends AbstractController
             'cars' => $cars,
         ]);
     }
+
+    // Function New
+     #[Route('/nouveau', name: 'newCar')]
+    public function new(
+        ManagerRegistry $doctrine,
+        HourlyRepository $hourlyRepository,
+    ) : Response {
+
+         // Import Entity Hourly via the repository
+         $hourlyRepository = $doctrine->getRepository(Hourly::class);
+         $hourlys = $hourlyRepository->findBy([]);
+
+        return $this->render('pages/car/new.html.twig', [
+            'hourlys' => $hourlys,
+        ]);
+    }
+    
+    // Function Edit
+     #[Route('/occasion/edition/{id}', name: 'editCar')]
+    public function edit(
+        ManagerRegistry $doctrine,
+        HourlyRepository $hourlyRepository,) : Response {
+
+         // Import Entity Hourly via the repository
+        $hourlyRepository = $doctrine->getRepository(Hourly::class);
+        $hourlys = $hourlyRepository->findBy([]);
+
+        return $this->render('pages/car/edit.html.twig', [
+            'hourlys' => $hourlys,
+        ]);
+    }
+    // Function Delete
+     #[Route('/occasion/delete/{id}', name: 'deleteCar')]
+    public function delete(
+        ManagerRegistry $doctrine,
+        HourlyRepository $hourlyRepository,) : Response {
+
+         // Import Entity Hourly via the repository
+        $hourlyRepository = $doctrine->getRepository(Hourly::class);
+        $hourlys = $hourlyRepository->findBy([]);
+
+        return $this->render('pages/car/delete.html.twig', [
+            'hourlys' => $hourlys,
+        ]);
+    }
 }
