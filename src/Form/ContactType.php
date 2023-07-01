@@ -54,7 +54,7 @@ class ContactType extends AbstractType
                 'attr' => [
                     'class' => 'btn button-car mt-4'
                 ],
-                'label' => 'Contacter'
+                'label' => 'Envoyer'
             ])
         ;
     }

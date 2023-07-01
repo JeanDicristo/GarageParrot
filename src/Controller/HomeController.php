@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Hourly;
+use App\Entity\Service;
 use App\Repository\HourlyRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

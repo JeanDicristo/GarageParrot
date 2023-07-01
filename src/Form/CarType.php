@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class CarType extends AbstractType
 {
@@ -88,6 +89,13 @@ class CarType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true, // Permettre la sélection de plusieurs options si nécessaire
                 'expanded' => true, // Afficher les options sous forme de cases à cocher si nécessaire
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image de la voiture',
+                'label_attr' => [
+                    'class' => 'form-label mt-4'
+                ],
+                'required' => false
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [

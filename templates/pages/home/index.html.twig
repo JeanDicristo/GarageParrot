@@ -1,7 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Garage V.Parrot{% endblock %}
+{% block title %}Garage V.Parrot
+{% endblock %}
 
 {% block body %}
-            <h1>Bienvenue dans le garage de Vincent Parrot</h1>
+	<h1>Bienvenue dans le garage de Vincent Parrot</h1>
+	<div class="container">
+		{% for service in services %}
+			<div class="card card-service">
+				<h2>{{ service.name }}</h2>
+				<p>{{ service.description }}</p>
+				<span>{{ service.price }}
+					€</span>
+			</div>
+		{% endfor %}
+	</div>
+    <section class="flyers-sec">
+	<img src="{{ asset('images/basic-wash.png') }}" alt="Mon image de lavage auto" width="400px" class="flyer">
+	<img src="{{ asset('images/basic-wash.png') }}" alt="Mon image de lavage auto" width="400px" class="flyer">
+	<img src="{{ asset('images/basic-wash.png') }}" alt="Mon image de lavage auto" width="400px" class="flyer">
+    </section>
+
+	<section class="">
+		<h3>Commentaire clients</h3>
+	</section>
 {% endblock %}

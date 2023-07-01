@@ -1,7 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CarController!{% endblock %}
+{% block title %}Hello CarController!
+{% endblock %}
 
 {% block body %}
-<h1>Voiture d'occasion</h1>
-{% endblock %}
+	<h1>Voiture d'occasion</h1>
+	<div class="container">
+		{# {% for car in cars %}
+			<div class="card" style="width: 18rem;">
+				<a href="{{ path('car_detail', { 'id': car.id }) }}">
+					<img src="{{ vich_uploader_asset(photo, 'imageFile') }}" alt="" class="img-photo">
+					<div class="card-body">
+						<h5 class="card-title">{{ car.name }}</h5>
+						<p class="card-text">Prix:
+							{{ car.price }}€</p>
+						<p class="card-text">Année:
+							{{ car.year }}</p>
+						<a href="#" class="btn btn-primary">Afficher plus</a>
+				</a>
+                    </div>
+			</div>
+	</div>
+	{% endfor %} #}
+    {% for car in cars %}
+		<div class="card card_car" style="width: 18rem;">
+			<a href="{{ path('car_detail', { 'id': car.id }) }}">
+				<img src="{{ vich_uploader_asset(car, 'imageFile') }}" alt="" class="img-photo" width="300px">
+				<div class="card-body">
+					<h5 class="card-title">{{ car.name }}</h5>
+					<p class="card-text">Prix:
+						{{ car.price }}€</p>
+					<p class="card-text">Année:
+						{{ car.year }}</p>
+					<a href="{{ path('car_detail', { 'id': car.id }) }}" class="btn btn-warning">Afficher plus</a>
+				</a>
+			</div>
+		</div>
+	{% endfor %}
+		<div>
+			<a href="{{ path('newCar')}}" class="btn">Créer une offre</a>
+		</div>
+	{% endblock %}
