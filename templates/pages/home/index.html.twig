@@ -5,7 +5,9 @@
 
 {% block body %}
 	<h1>Bienvenue dans le garage de Vincent Parrot</h1>
+	s
 	<div class="container">
+	<h2>Les service proposé</h2>
 		{% for service in services %}
 			<div class="card card-service">
 				<h2>{{ service.name }}</h2>
@@ -15,13 +17,59 @@
 			</div>
 		{% endfor %}
 	</div>
-    <section class="flyers-sec">
-	<img src="{{ asset('images/basic-wash.png') }}" alt="Mon image de lavage auto" width="400px" class="flyer">
-	<img src="{{ asset('images/basic-wash.png') }}" alt="Mon image de lavage auto" width="400px" class="flyer">
-	<img src="{{ asset('images/basic-wash.png') }}" alt="Mon image de lavage auto" width="400px" class="flyer">
-    </section>
-
-	<section class="">
-		<h3>Commentaire clients</h3>
+	<section class="flyers-sec">
+		<img src="{{ asset('images/basic-wash.png') }}" alt="Mon image de lavage auto" width="400px" class="flyer">
+		<img src="{{ asset('images/basic-wash.png') }}" alt="Mon image de lavage auto" width="400px" class="flyer">
+		<img src="{{ asset('images/basic-wash.png') }}" alt="Mon image de lavage auto" width="400px" class="flyer">
 	</section>
+
+	<section class="commentaire">
+		<h3>Commentaire clients</h3>
+		<a href="{{ path('testimony')}}" class="btn">Laisser un avis</a>
+		<div id="carouselExample" class="carousel slide">
+			<div class="carousel-inner">
+				{% for index, testimony in testimonys %}
+					<div class="carousel-item {% if index == 0 %}active{% endif %}">
+						<div class="card card-carousel">
+							<h2>{{ testimony.name }}</h2>
+							<p>{{ testimony.commentaire }}</p>
+							<div class="rating">
+								{% for i in 1..testimony.note %}
+									<i class="fas fa-star"></i>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+	</section>
+
+
+	{# <div class="container">
+	    {% for testimony in testimonys %}
+	        <div class="card card-service">
+	            <h2>{{ testimony.name }}</h2>
+	            <p>{{ testimony.commentaire }}</p>
+	            <div class="rating">
+	                {% for i in 1..testimony.note %}
+	                    <i class="fas fa-star"></i>
+	                {% endfor %}
+	            </div>
+	        </div>
+	    {% endfor %}
+	    <div class="navigation">
+	        <span class="arrow arrow-left">&#8592;</span>
+	        <span class="arrow arrow-right">&#8594;</span>
+	    </div>
+	</div> #}
+
 {% endblock %}
