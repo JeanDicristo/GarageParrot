@@ -1,0 +1,85 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ContactController!
+{% endblock %}
+
+{% block body %}
+	<h1>Formulaire de création d'offre</h1>
+	{{ form_start(carForm) }}
+	<div class="form-group">
+		{{ form_label(carForm.name) }}
+		{{ form_widget(carForm.name) }}
+		<div class="form-error">
+			{{ form_errors(carForm.name) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(carForm.price) }}
+		{{ form_widget(carForm.price) }}
+		<div class="form-error">
+			{{ form_errors(carForm.price) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(carForm.description) }}
+		{{ form_widget(carForm.description) }}
+		<div class="form-error">
+			{{ form_errors(carForm.description) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(carForm.year) }}
+		{{ form_widget(carForm.year) }}
+		<div class="form-error">
+			{{ form_errors(carForm.year) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(carForm.mileage) }}
+		{{ form_widget(carForm.mileage) }}
+		<div class="form-error">
+			{{ form_errors(carForm.mileage) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(carForm.color) }}
+		{{ form_widget(carForm.color) }}
+		<div class="form-error">
+			{{ form_errors(carForm.color) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(carForm.topping) }}
+		{{ form_widget(carForm.topping) }}
+		<div class="form-error">
+			{{ form_errors(carForm.topping) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(carForm.brand) }}
+		{{ form_widget(carForm.brand) }}
+		<div class="form-error">
+			{{ form_errors(carForm.brand) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(carForm.equipment) }}
+		{{ form_widget(carForm.equipment) }}
+		<div class="form-error">
+			{{ form_errors(carForm.equipment) }}
+		</div>
+	</div>
+	<div class="form-group">
+		{{ form_label(carForm.imageFile) }}
+		{{ form_widget(carForm.imageFile) }}
+		<div class="form-error">
+			{{ form_errors(carForm.imageFile) }}
+		</div>
+	</div>
+		<div class="form-group">
+			{{ form_row(carForm.submit) }}
+		</div>
+
+
+	{{ form_end(carForm) }}
+{% endblock %}

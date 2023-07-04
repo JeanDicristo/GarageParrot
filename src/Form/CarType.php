@@ -5,14 +5,18 @@ namespace App\Form;
 use App\Entity\Brand;
 use App\Entity\Car;
 use App\Entity\Equipment;
+use App\Entity\Photo;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class CarType extends AbstractType
@@ -22,21 +26,24 @@ class CarType extends AbstractType
         $builder
             ->add('name', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Bmw ......'
                 ],
                 'label' => 'Nom',
                 'label_attr' => ['class' => 'form-label mt-4'],
             ])
             ->add('price', NumberType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => '10000 €'
                 ],
                 'label' => 'Prix',
                 'label_attr' => ['class' => 'form-label mt-4'],
             ])
             ->add('description', TextareaType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Description du véhicule'
                 ],
                 'label' => 'Description',
                 'label_attr' => ['class' => 'form-label mt-4'],      
@@ -44,6 +51,7 @@ class CarType extends AbstractType
             ->add('year', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
+                    'placeholder' => 'Année mise en circulation',
                     'min' => 2010,
                     'max' => date('Y'),
                     'step' => 1,
@@ -53,21 +61,24 @@ class CarType extends AbstractType
             ])
             ->add('mileage', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Klm au compteur'
                 ],
                 'label' => 'Kilometre',
                 'label_attr' => ['class' => 'form-label mt-4'],
             ])
             ->add('color', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Saisissez une couleur'
                 ],
                 'label' => 'Couleur',
                 'label_attr' => ['class' => 'form-label mt-4'],
             ])
             ->add('topping', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control'
+                    'class' => 'form-control',
+                    'placeholder' => 'Garniture intérieur'
                 ],
                 'label' => 'Garniture intrieur',
                 'label_attr' => ['class' => 'form-label mt-4'],
@@ -82,10 +93,10 @@ class CarType extends AbstractType
             ])
             ->add('equipment', EntityType::class, [
                 'attr' => [
-                    'class' => 'form-control form-equipment'
+                    'class' => 'form-control'
                 ],
                 'label' => 'Équipement',
-                'class' => Equipment::class,
+                'class' => Equipment::class ,
                 'choice_label' => 'name',
                 'multiple' => true, // Permettre la sélection de plusieurs options si nécessaire
                 'expanded' => true, // Afficher les options sous forme de cases à cocher si nécessaire
@@ -97,6 +108,12 @@ class CarType extends AbstractType
                 ],
                 'required' => false
             ])
+            ->add('images', FileType::class, [
+                'label' => 'Images',
+                'multiple' => true,
+                'mapped' => false, // Ceci empêche la liaison automatique avec l'entité voiture
+            ])
+         
             ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn button-car mt-4'

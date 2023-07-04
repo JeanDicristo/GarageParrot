@@ -61,11 +61,17 @@ class Car
     #[ORM\ManyToMany(targetEntity: Equipment::class, inversedBy: 'cars')]
     private Collection $equipment;
 
+    #[ORM\OneToMany(mappedBy: 'car', targetEntity: Image::class)]
+    private Collection $images;
+
+
     public function __construct()
     {
         $this->equipment = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
+        $this->images = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -261,4 +267,35 @@ class Car
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): static
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setCar($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): static
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getCar() === $this) {
+                $image->setCar(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

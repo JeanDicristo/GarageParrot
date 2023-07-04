@@ -1,7 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CarDetailController!{% endblock %}
+{% block title %}Occasion - V.Parrot{% endblock %}
 
 {% block body %}
 <h1>Détail de l'offre</h1>
+
+    	{% for images in images %}
+			<div class="card card_car" style="width: 18rem;">
+					<img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="" class="img-photo" width="300px">
+				</div>
+			</div>
+		{% endfor %}
 {% endblock %}

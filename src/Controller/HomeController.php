@@ -35,7 +35,6 @@ class HomeController extends AbstractController
          $testimonyRepository = $doctrine->getRepository(Testimony::class);
          $testimonys = $testimonyRepository->findBy([]);
 
-
         return $this->render('pages/home/index.html.twig', [
            'hourlys' => $hourlys,
            'services' => $services,

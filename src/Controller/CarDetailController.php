@@ -5,9 +5,12 @@ namespace App\Controller;
 use App\Entity\Car;
 use App\Entity\Brand;
 use App\Entity\Hourly;
+use App\Entity\Image;
 use App\Repository\BrandRepository;
 use App\Repository\CarRepository;
 use App\Repository\HourlyRepository;
+use App\Repository\ImageRepository;
+use App\Repository\PhotoRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,6 +23,7 @@ class CarDetailController extends AbstractController
         ManagerRegistry $doctrine,
         HourlyRepository $hourlyRepository,
         BrandRepository $brandRepository,
+        ImageRepository $imageRepository,
         CarRepository $carRepository,
     ): Response
     {
@@ -35,6 +39,10 @@ class CarDetailController extends AbstractController
         $carRepository = $doctrine->getRepository(Car::class);
         $cars = $carRepository->findBy([]);
 
+        // Import Entity Car via the repository
+       $imageRepository = $doctrine->getRepository(Image::class);
+       $images = $imageRepository->findBy([]);
+
         //  if (!$car) {
         //     throw $this->createNotFoundException('Voiture introuvable');
         //  }
@@ -43,6 +51,7 @@ class CarDetailController extends AbstractController
             'hourlys' => $hourlys,
             'brands' => $brands,
             'cars' => $cars,
+            'images' => $images,
         ]);
     }
 }

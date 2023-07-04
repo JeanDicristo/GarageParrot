@@ -6,4 +6,8 @@
 <h1>Formulaire de contact</h1>
 {{ form_start(contactForm) }}
 {{ form_end(contactForm) }}
+
+<div class="d-flex justify-content-end">
+    <a href="{{ path('newCar')}}" class="btn btn-create">Créer une offre</a>
+</div>
 {% endblock %}
