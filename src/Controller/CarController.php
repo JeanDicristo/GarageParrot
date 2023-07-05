@@ -60,7 +60,24 @@ class CarController extends AbstractController
 
          if ($form->isSubmitted() && $form->isValid()) {
             $car = $form->getData();
-        
+
+            foreach ($car->getImageFile() as $uploaderHelper) {
+                $image = new Image();
+                $imageName = $uploaderHelper->asset($car, 'imageFile');
+                $image->setImageName($imageName);
+                $manager->persist($image);
+                $car->addImage($image);
+            }
+            
+            // Gérez les images supplémentaires ici
+            foreach ($car->getImages() as $uploaderHelper) {
+                $additionalImage = new Image();
+                $additionalImageName = $uploaderHelper->asset($car, 'images');
+                $additionalImage->setImageName($additionalImageName);
+                $additionalImage->setCar($car);
+                $manager->persist($additionalImage);
+                $car->addImage($additionalImage);
+            }
             
             $manager->persist($car);
             $manager->flush();

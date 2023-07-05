@@ -100,7 +100,11 @@ class CarType extends AbstractType
                 ],
                 'required' => false
             ])
-         
+            ->add('images', FileType::class, [
+                'label' => 'Images',
+                'multiple' => true,
+                'mapped' => false, // Cela empêche la liaison automatique avec l'entité Car
+            ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn button-car mt-4'
