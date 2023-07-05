@@ -40,14 +40,6 @@ class CarType extends AbstractType
                 'label' => 'Prix',
                 'label_attr' => ['class' => 'form-label mt-4'],
             ])
-            ->add('description', TextareaType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'Description du véhicule'
-                ],
-                'label' => 'Description',
-                'label_attr' => ['class' => 'form-label mt-4'],      
-            ])
             ->add('year', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
@@ -107,11 +99,6 @@ class CarType extends AbstractType
                     'class' => 'form-label mt-4'
                 ],
                 'required' => false
-            ])
-            ->add('images', FileType::class, [
-                'label' => 'Images',
-                'multiple' => true,
-                'mapped' => false, // Ceci empêche la liaison automatique avec l'entité voiture
             ])
          
             ->add('submit', SubmitType::class, [
