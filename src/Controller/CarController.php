@@ -23,8 +23,7 @@ class CarController extends AbstractController
         ManagerRegistry $doctrine,
         HourlyRepository $hourlyRepository,
         CarRepository $carRepository,
-    ): Response
-    {
+    ): Response {
         // Import Entity Hourly via the repository
         $hourlyRepository = $doctrine->getRepository(Hourly::class);
         $hourlys = $hourlyRepository->findBy([]);
@@ -39,26 +38,26 @@ class CarController extends AbstractController
         ]);
     }
 
-    
+
     // Function New
-     #[Route('/nouveau', name: 'newCar')]
+    #[Route('/nouveau', name: 'newCar')]
     public function new(
         ManagerRegistry $doctrine,
-        HttpFoundationRequest $request, 
+        HttpFoundationRequest $request,
         HourlyRepository $hourlyRepository,
         EntityManagerInterface $manager,
         UploaderHelper $uploaderHelper
-    ) : Response {
+    ): Response {
 
-         // Import Entity Hourly via the repository
-         $hourlyRepository = $doctrine->getRepository(Hourly::class);
-         $hourlys = $hourlyRepository->findBy([]);
+        // Import Entity Hourly via the repository
+        $hourlyRepository = $doctrine->getRepository(Hourly::class);
+        $hourlys = $hourlyRepository->findBy([]);
 
-         $car = new Car();
-         $form = $this->createForm(CarType::class, $car);
-         $form->handleRequest($request);
+        $car = new Car();
+        $form = $this->createForm(CarType::class, $car);
+        $form->handleRequest($request);
 
-         if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $car = $form->getData();
 
             foreach ($car->getImageFile() as $uploaderHelper) {
@@ -68,17 +67,18 @@ class CarController extends AbstractController
                 $manager->persist($image);
                 $car->addImage($image);
             }
-            
+
             // Gérez les images supplémentaires ici
-            foreach ($car->getImages() as $uploaderHelper) {
+            foreach ($car->getImages() as $uploadedImage) {
+                dd($uploadedImage);
                 $additionalImage = new Image();
-                $additionalImageName = $uploaderHelper->asset($car, 'images');
+                $additionalImageName = $uploaderHelper->asset($uploadedImage, 'images');
                 $additionalImage->setImageName($additionalImageName);
                 $additionalImage->setCar($car);
                 $manager->persist($additionalImage);
                 $car->addImage($additionalImage);
             }
-            
+
             $manager->persist($car);
             $manager->flush();
 
@@ -88,35 +88,35 @@ class CarController extends AbstractController
             );
 
             return $this->redirectToRoute('car');
-         }
+        }
 
         return $this->render('pages/car/new.html.twig', [
             'carForm' => $form->createView(),
             'hourlys' => $hourlys,
         ]);
     }
-    
+
 
     // Function Edit
-     #[Route('/occasion/edition/{id}', name: 'editCar', methods: ['GET', 'POST'])]
+    #[Route('/occasion/edition/{id}', name: 'editCar', methods: ['GET', 'POST'])]
     public function edit(
         ManagerRegistry $doctrine,
         HourlyRepository $hourlyRepository,
-        HttpFoundationRequest $request, 
+        HttpFoundationRequest $request,
         EntityManagerInterface $manager
-        ) : Response {
+    ): Response {
 
-         // Import Entity Hourly via the repository
+        // Import Entity Hourly via the repository
         $hourlyRepository = $doctrine->getRepository(Hourly::class);
         $hourlys = $hourlyRepository->findBy([]);
 
         $car = new Car();
-         $form = $this->createForm(CarType::class, $car);
-         $form->handleRequest($request);
+        $form = $this->createForm(CarType::class, $car);
+        $form->handleRequest($request);
 
-         if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $car = $form->getData();
-            
+
             $manager->persist($car);
             $manager->flush();
 
@@ -126,7 +126,7 @@ class CarController extends AbstractController
             );
 
             return $this->redirectToRoute('index');
-         }
+        }
 
         return $this->render('pages/car/edit.html.twig', [
             'carForm' => $form->createView(),
@@ -136,11 +136,11 @@ class CarController extends AbstractController
 
 
     // Function Delete
-     #[Route('/occasion/supprimer/{id}', name: 'deleteCar', methods: ['GET'])]
+    #[Route('/occasion/supprimer/{id}', name: 'deleteCar', methods: ['GET'])]
     public function delete(
         EntityManagerInterface $manager,
         Car $car
-        ) : Response {
+    ): Response {
 
         $manager->remove($car);
         $manager->flush();
@@ -151,6 +151,5 @@ class CarController extends AbstractController
         );
 
         return $this->redirectToRoute('occasion');
-        
     }
 }

@@ -1,14 +1,37 @@
-{% extends 'base.html.twig' %}
+ {# {% extends 'base.html.twig' %}
 
 {% block title %}Occasion - V.Parrot{% endblock %}
 
 {% block body %}
 <h1>Détail de l'offre</h1>
 
-    	{% for images in images %}
+    	{% for car in car %}
 			<div class="card card_car" style="width: 18rem;">
-					<img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="" class="img-photo" width="300px">
+					<img src="{{ vich_uploader_asset(car, 'imageFile') }}" alt="" class="img-photo" width="300px">
 				</div>
 			</div>
 		{% endfor %}
 {% endblock %}
+ { #}
+{% extends 'base.html.twig' %}
+
+{% block title %}V.Parrot automobile{% endblock %}
+
+{% block body %}
+    <h1>Voiture d'occasion</h1>
+    <div class=" offres-detail">
+        <div class="col mb-4">
+            <div class="card card_car" style="width: 18rem;">
+                <a href="{{ path('car_detail', { 'id': car.id }) }}">
+                    <img src="{{ vich_uploader_asset(car, 'imageFile') }}" alt="" class="img-photo" width="300px">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ car.name }}</h5>
+                        <p class="card-text">Prix: {{ car.price }}€</p>
+                        <p class="card-text">Année: {{ car.year }}</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
