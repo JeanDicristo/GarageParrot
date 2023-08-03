@@ -21,17 +21,40 @@
     <h1>Voiture d'occasion</h1>
     <div class=" offres-detail">
         <div class="col mb-4">
-            <div class="card card_car" style="width: 18rem;">
+            <div class="card card_detail">
                 <a href="{{ path('car_detail', { 'id': car.id }) }}">
                     <img src="{{ vich_uploader_asset(car, 'imageFile') }}" alt="" class="img-photo" width="300px">
                     <div class="card-body">
                         <h5 class="card-title">{{ car.name }}</h5>
-                        <p class="card-text">Prix: {{ car.price }}€</p>
+                        <p class="card-text-price">Prix: {{ car.price }}€</p>
                         <p class="card-text">Année: {{ car.year }}</p>
                     </div>
                 </a>
             </div>
         </div>
     </div>
+            <h2>Équipements </h2>
+    <div class="equipment">
+     {% if car.equipment is not empty %}
+        <ul>
+            {% for equipment in car.equipment %}
+                <li>{{ equipment.name }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun équipement disponible pour cette voiture.</p>
+    {% endif %}</div>
+
+<div class="formDetail">
+    <h2 class="title_form_detail">Formulaire de contact</h2>
+</div>
+    {# Afficher le formulaire de contact #}
+{{ form_start(form) }}
+    {{ form_row(form.name) }}
+ {{ form_row(form.firstName) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.phone) }}
+    {{ form_row(form.message) }}
+    {{ form_end(form) }}
 {% endblock %}
 

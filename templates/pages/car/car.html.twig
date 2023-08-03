@@ -1,27 +1,40 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}V.Parrot offres{% endblock %}
+{% block title %}V.Parrot offres
+{% endblock %}
 
 {% block body %}
-    <h1>Voiture d'occasion</h1>
-    <div class="d-flex justify-content-end">
-        <a href="{{ path('newCar')}}" class="btn btn-create">Créer une offre</a>
-    </div>
-    <div class=" offres row row-cols-5">
-        {% for car in cars %}
-            <div class="col mb-4">
-                <div class="card card_car" style="width: 18rem;">
-                    <a href="{{ path('car_detail', { 'id': car.id }) }}">
-                        <img src="{{ vich_uploader_asset(car, 'imageFile') }}" alt="" class="img-photo" width="300px">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ car.name }}</h5>
-                            <p class="card-text">Prix: {{ car.price }}€</p>
-                            <p class="card-text">Année: {{ car.year }}</p>
-                            <a href="{{ path('car_detail', { 'id': car.id }) }}" class="btn btn-warning">Afficher plus</a>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
+	<h1>Voiture d'occasion</h1>
+	<div class="d-flex justify-content-end">
+		<a href="{{ path('newCar')}}" class="btn btn-create">Créer une offre</a>
+	</div>
+	<div class="filtrage">
+<form id="filter-form">
+    <input type="text" id="year" name="year" placeholder="Année">
+    <input type="text" id="brand" name="brand" placeholder="Marque">
+    <button type="submit">Filtrer</button>
+</form>
+	</div>
+	<div class=" offres row row-cols-4">
+		{% for car in cars %}
+			<div class="col mb-4">
+				<div class="card card_car" style="width: 18rem;">
+					<a href="{{ path('car_detail', { 'id': car.id }) }}">
+						<img src="{{ vich_uploader_asset(car, 'imageFile') }}" alt="" class="img-photo" width="300px">
+						<div class="card-body">
+							<h5 class="card-title">{{ car.name }}</h5>
+							<p class="card-text-price">Prix:
+								{{ car.price | number_format(0, ',', '  ') }}€</p>
+							<p class="card-text">Année:
+								{{ car.year }}</p>
+							<a href="{{ path('car_detail', { 'id': car.id }) }}" class="btn btn-warning">Afficher plus</a>
+						</div>
+					</a>
+				</div>
+
+
+			</div>
+		{% endfor %}
+	</div>
+	<script src="{{ asset('Js/app.js')}}"></script>
 {% endblock %}

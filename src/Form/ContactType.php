@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Contact;
+use App\Entity\Car;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
@@ -16,13 +17,13 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class, [
-                'attr' => [
-                    'class' => 'form-control'
-                ],
-                'label' => 'Nom',
-                'label_attr' => ['class' => 'form-label mt-4'],
-            ])
+        ->add('name', TextType::class, [
+            'attr' => [
+                'class' => 'form-control'
+            ],
+            'label' => 'Nom de l\'annonce',
+            'label_attr' => ['class' => 'form-label mt-4'],
+        ])
             ->add('firstName', TextType::class, [
                 'attr' => [
                     'class' => 'form-control'

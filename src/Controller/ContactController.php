@@ -47,6 +47,7 @@ class ContactController extends AbstractController
         }
         return $this->render('pages/contact/contact.html.twig', [
             'contactForm' => $form->createView(),
+            'form' => $form->createView(),
             'hourlys' => $hourlys,
         ]);
     }

@@ -39,6 +39,23 @@ class CarRepository extends ServiceEntityRepository
         }
     }
 
+    public function findFilteredCars(?int $year = null, ?string $brand = null)
+    {
+        $queryBuilder = $this->createQueryBuilder('c');
+
+        if ($year !== null) {
+            $queryBuilder->andWhere('c.year = :year')
+                         ->setParameter('year', $year);
+        }
+
+        if ($brand !== null) {
+            $queryBuilder->andWhere('c.brand = :brand')
+                         ->setParameter('brand', $brand);
+        }
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
 //    /**
 //     * @return Car[] Returns an array of Car objects
 //     */

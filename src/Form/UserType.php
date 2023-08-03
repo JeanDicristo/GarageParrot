@@ -33,19 +33,6 @@ class UserType extends AbstractType
                 new Assert\Length(['min'  =>  2, 'max' => 255])
             ]
         ])
-        ->add('Guest', IntegerType::class,  [
-            'attr' => [
-                'class' => 'form-control'
-            ],
-            'label' => 'Nombre de convives',
-            'label_attr' => [
-                'class' => 'form-label mt-4'
-            ],
-            'constraints' => [
-                new Assert\PositiveOrZero(),
-                new Assert\Length(['min'  =>  0, 'max' => 255])
-            ]
-        ])
         ->add('plainPassword', PasswordType::class, [
             'attr' => [
                 'class' => 'form-control'

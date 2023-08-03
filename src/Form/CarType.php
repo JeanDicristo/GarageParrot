@@ -12,11 +12,9 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Vich\UploaderBundle\Form\Type\VichFileType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class CarType extends AbstractType
@@ -99,11 +97,6 @@ class CarType extends AbstractType
                     'class' => 'form-label mt-4'
                 ],
                 'required' => false
-            ])
-            ->add('images', FileType::class, [
-                'label' => 'Images',
-                'multiple' => true,
-                'mapped' => false, // Cela empêche la liaison automatique avec l'entité Car
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
